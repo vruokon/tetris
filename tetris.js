@@ -4,19 +4,11 @@ const width = 500;
 
 var matrix = makeMatrix();
 drawGrid();
-console.log(matrix);
 
 setInterval(() => {
-    if(true){
-        insertTetris();
-    }
     goThroughMatrix();
 }, 1000);
 
-function insertTetris() {
-    matrix[0][22] = 1;
-
-}
 
 function goThroughMatrix(){
     for(let y = 0; y<matrix.length; y++){
