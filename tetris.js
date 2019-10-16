@@ -3,7 +3,13 @@ const height = 680;
 const width = 400;
 
 function matrix() {
-    this.coordinates = makeMatrix()
+    this.coordinates = makeMatrix();
+
+    this.insertTileToCoordinates = (tile) => {
+        tile.forEach(element => {
+            this.coordinates[element[0]][element[1]] =1;
+        });
+    }
 }
 
 function tile() {
