@@ -3,7 +3,17 @@ const height = 680;
 const width = 400;
 
 function matrix() {
-    this.coordinates = makeMatrix();
+    this.coordinates = [];
+
+    this.makeMatrix = () => {
+        for (let y = 0; y < height / box; y++) {
+            var array = []
+            for (let x = 0; x < width / box; x++) {
+                array.push(0);
+            }
+            this.coordinates.push(array);
+        }
+    }
 
     this.insertTileToCoordinates = (tile) => {
         tile.forEach(element => {
@@ -86,15 +96,4 @@ function drawGrid() {
             }
         }
     }
-}
-function makeMatrix() {
-    var matrix = [];
-    for (let y = 0; y < height / box; y++) {
-        var array = []
-        for (let x = 0; x < width / box; x++) {
-            array.push(0);
-        }
-        matrix.push(array);
-    }
-    return matrix;
 }
