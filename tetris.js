@@ -7,7 +7,12 @@ function matrix() {
 }
 
 function tile() {
-    this.coord = [[0,1],[0,1],[0,1],[0,1]];
+    this.coord = [
+        [0, 6],
+        [1, 6],
+        [2, 6],
+        [3, 6]
+    ];
 
     this.gravity = () => {
         this.coord.forEach(coordinate => {
@@ -20,22 +25,33 @@ function tile() {
     }
 
     this.collision = (array_of_arrays) => {
-        for(let i = 0; i<this.coord.length; i++) {
+        for (let i = 0; i < this.coord.length; i++) {
             let arrayY = this.coord[i][0];
             let arrayX = this.coord[i][1];
             console.log(arrayY, arrayX);
             console.log(array_of_arrays[arrayY][arrayX]);
-            if(array_of_arrays[arrayY][arrayX] == 1){
+            if (array_of_arrays[arrayY][arrayX] == 1) {
                 console.log('true')
                 return true;
             }
         }
         return false;
     }
+
+    this.drawTile = () => {
+        var canvas = document.getElementById('tetris');
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+            this.coord.forEach(crd  => {
+                ctx.fillRect(crd[1]*box, crd[0]*box, box, box); 
+            });
+        }
+    }
 }
+
 let tiili = new tile();
 let m = new matrix();
-console.log(m);
+console.log(tiili.getCoordinates());
 
 
 /* setInterval(() => {
