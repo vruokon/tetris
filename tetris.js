@@ -34,13 +34,13 @@ function matrix() {
         }
     }
     this.matrixIsFull = () => {
-        for(let j = 0; j<this.coordinates[0].length; j++){
+        for (let j = 0; j < this.coordinates[0].length; j++) {
             let counter = 0;
-            for(let i = 0; i<this.coordinates.length; i++){
-                if(this.coordinates[i][j] == 1){
+            for (let i = 0; i < this.coordinates.length; i++) {
+                if (this.coordinates[i][j] == 1) {
                     counter++;
                 }
-                if(counter>16){
+                if (counter > 16) {
                     return true;
                 }
             }
@@ -73,7 +73,7 @@ function tile() {
             let arrayX = this.coord[i][1];
             //console.log(arrayY, arrayX);
             //console.log(array_of_arrays[arrayY][arrayX]);
-            if (arrayY> 15 || array_of_arrays[arrayY][arrayX] == 1) {
+            if (arrayY > 15 || array_of_arrays[arrayY+1][arrayX] == 1) {
                 console.log('true')
                 return true;
             }
@@ -104,32 +104,39 @@ function tile() {
 
 
 //Game itself
-var ruudukko = new matrix();
-ruudukko.makeMatrix();
-ruudukko.drawGrid();
-var counter = 1;
-var tiili = new tile();
-while(gameOn) {
-    tiili.drawTile();
-    if(tiili.collision(ruudukko.coordinates)) {
-        ruudukko.insertTileToCoordinates(tiili.getCoordinates());
-        tiili = new tile();
-    } else {
-        tiili.eraseTile();
-        tiili.gravity();
-        ruudukko.drawGrid();
-    }
-    
-    console.log(ruudukko.matrixIsFull());
-    if(ruudukko.matrixIsFull()) {
-        gameOn = false;
-    }
-    console.log(counter);
-    counter++;
-}
+Game();
 
-        
- 
+
+
+
+function Game() {
+    var ruudukko = new matrix();
+    ruudukko.makeMatrix();
+    ruudukko.drawGrid();
+    var counter = 1;
+    var tiili = new tile();
+    tiili.drawTile();
+    setInterval(() => {
+        tiili.drawTile();
+        if (tiili.collision(ruudukko.coordinates)) {
+            ruudukko.insertTileToCoordinates(tiili.getCoordinates());
+            tiili = new tile();
+            tiili.drawTile();
+        } else {
+            tiili.eraseTile();
+            tiili.gravity();
+            ruudukko.drawGrid();
+            tiili.drawTile();
+        }
+
+        console.log(ruudukko.matrixIsFull());
+        if (ruudukko.matrixIsFull()) {
+            gameOn = false;
+        }
+        console.log(counter);
+        counter++;
+    }, 1000);
+}
 
 
 
