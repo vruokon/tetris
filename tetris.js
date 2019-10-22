@@ -63,6 +63,12 @@ function tile() {
         });
     }
 
+    this.move = (direction) => {
+        this.coord.forEach(coordinate => {
+            coordinate[1] += direction;
+        });
+    }
+
     this.getCoordinates = () => {
         return this.coord;
     }
@@ -110,6 +116,23 @@ Game();
 
 
 function Game() {
+    window.addEventListener('keydown', (event) => {
+        switch(event.key) {
+            case 'ArrowLeft':
+                tiili.eraseTile();
+                tiili.move(-1);
+                tiili.drawTile();
+                ruudukko.drawGrid();
+                break;
+            case 'ArrowRight':
+                tiili.eraseTile();
+                tiili.move(+1);
+                tiili.drawTile();
+                ruudukko.drawGrid();
+                break;
+        }
+        
+    });
     var ruudukko = new matrix();
     ruudukko.makeMatrix();
     ruudukko.drawGrid();
